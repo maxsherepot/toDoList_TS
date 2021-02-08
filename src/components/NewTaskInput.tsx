@@ -8,12 +8,12 @@ const NewTaskInput: React.FC = () => {
             <form>
                 <div className="form-outline">
                     <input type="text" id="form1Example2"
-                        className="form-control border" />
+                        className="form-control border shadow-3" />
                     <label className="form-label" htmlFor="form1Example2">Password</label>
                 </div>
             </form>
-            <button className="btn special-color">Add task</button>
 
+            <button className="btn special-color text-light">Add task</button>
         </div>
     );
 }
