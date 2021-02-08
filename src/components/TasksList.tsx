@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import {TaskInterface} from './interfaces/interfaces';
+import { TaskInterface } from '../interfaces/interfaces';
+
+interface TasksListProps {
+    tasks: TaskInterface[]
+};
 
 
+const TasksList: React.FC<TasksListProps> = ({ tasks }) => {
 
-const TasksList: React.FC = () => {
-    const [tasks, useTasks] = useState<TaskInterface[]>([
-        { title: "first tasks", id: 1, done: false },
-        { title: "second tasks", id: 21, done: true },
-    ]);
-
-
+    
     return (
         <div className="mt-4">
             <ul className="list-group">
-
-                {tasks.map((task) =>
+                {tasks.map(task =>
                     <>
                         <li key={task.id} className="list-group-item mt-1 border d-flex">
                             <div className="form-check">
                                 <input
+                                    onChange={() => { }}
                                     className="form-check-input"
                                     type="checkbox"
                                     checked={task.done} />
@@ -28,7 +27,6 @@ const TasksList: React.FC = () => {
                         </li>
                     </>
                 )}
-
             </ul>
         </div >
     );
