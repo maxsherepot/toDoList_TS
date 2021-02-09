@@ -6,11 +6,12 @@ import { TaskInterface } from '../interfaces/interfaces';
 interface TasksListProps {
     tasks: TaskInterface[],
     onCompleteTask(id: number): void,
+    onDeleteTask(id: number): void,
 };
 
 
 
-const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask }) => {
+const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTask }) => {
 
     return (
         <div className="mt-4">
@@ -20,16 +21,22 @@ const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask }) => {
 
                     return (
                         <li key={task.id}
+                            className="list-group-item mt-1 border d-flex justify-content-between" >
 
-                            className="list-group-item mt-1 border d-flex" >
-                            <div className="form-check">
-                                <input
-                                    onChange={() => { onCompleteTask(task.id) }}
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    checked={task.done} />
+                            <div className="d-flex">
+                                <div className="form-check">
+                                    <input onChange={() => { onCompleteTask(task.id) }}
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        checked={task.done} />
+                                </div>
+                                <div className={titleClass}> {task.title}</div>
                             </div>
-                            <div className={titleClass} > {task.title}</div>
+
+                            <div>
+                                <i onClick={() => { onDeleteTask(task.id) }}
+                                    className="fas fa-trash pt-1 text-danger cursor-pointer"></i>
+                            </div>
                         </li>
                     )
                 }

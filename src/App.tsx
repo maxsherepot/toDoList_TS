@@ -12,7 +12,6 @@ const App: React.FC = () => {
     { title: "second tasks", id: 2222, done: true },
   ]);
 
-
   const onAddTask = (title: string) => {
     const newTask: TaskInterface = {
       title,
@@ -21,7 +20,6 @@ const App: React.FC = () => {
     };
     setTasks(tasks => [newTask, ...tasks]);
   };
-
 
   const onCompleteTask = (id: number) => {
     setTasks(prev =>
@@ -36,6 +34,9 @@ const App: React.FC = () => {
       }))
   };
 
+  const onDeleteTask = (id: number) => {
+    setTasks(prev => prev.filter(todo => todo.id !== id));
+  };
 
 
   return (
@@ -45,10 +46,10 @@ const App: React.FC = () => {
       <TasksList
         tasks={tasks}
         onCompleteTask={onCompleteTask}
-      />
+        onDeleteTask={onDeleteTask}/>
     </div>
   );
-}
+};
 
 
 export default App;
