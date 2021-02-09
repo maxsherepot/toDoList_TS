@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TaskInterface } from '../interfaces/interfaces';
-
 
 
 interface TasksListProps {
     tasks: TaskInterface[],
     onCompleteTask(id: number): void,
-    onDeleteTask(id: number): void,
+    onOpenDeleteModal(id: number):void
 };
 
 
-
-const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTask }) => {
+const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask,onOpenDeleteModal }) => {
 
     return (
         <div className="mt-4">
-
             {tasks.length === 0
                 ?
                 <div className="text-center">No tasks yet</div>
@@ -27,7 +24,6 @@ const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTa
                         return (
                             <li key={task.id}
                                 className="list-group-item mt-1 border d-flex justify-content-between" >
-
                                 <div className="d-flex">
                                     <div className="form-check">
                                         <input onChange={() => { onCompleteTask(task.id) }}
@@ -37,9 +33,8 @@ const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTa
                                     </div>
                                     <div className={titleClass}> {task.title}</div>
                                 </div>
-
                                 <div>
-                                    <i onClick={() => { onDeleteTask(task.id) }}
+                                    <i onClick={() => { onOpenDeleteModal(task.id) }}
                                         className="fas fa-trash pt-1 text-danger cursor-pointer"></i>
                                 </div>
                             </li>
@@ -47,9 +42,7 @@ const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTa
                     }
                     )}
                 </ul>
-
             }
-
         </div >
     );
 };
