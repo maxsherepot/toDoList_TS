@@ -29,7 +29,7 @@ const NewTaskInput: React.FC<NewTaskInputProps> = ({ onAddTask }) => {
                         onChange={event => onTitleChahge(event)}
                         type="text" id="form1Example2"
                         className="form-control border shadow-3" />
-                    <label className="form-label" htmlFor="form1Example2">Password</label>
+                    <label className="form-label" htmlFor="form1Example2">enter a task</label>
                 </div>
             </form>
             <button type="submit"

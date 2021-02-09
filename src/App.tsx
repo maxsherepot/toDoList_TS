@@ -46,7 +46,7 @@ const App: React.FC = () => {
       <TasksList
         tasks={tasks}
         onCompleteTask={onCompleteTask}
-        onDeleteTask={onDeleteTask}/>
+        onDeleteTask={onDeleteTask} />
     </div>
   );
 };

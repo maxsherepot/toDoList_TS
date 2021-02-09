@@ -15,33 +15,41 @@ const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onDeleteTa
 
     return (
         <div className="mt-4">
-            <ul className="list-group">
-                {tasks.map(task => {
-                    let titleClass = task.done ? "done" : "";
 
-                    return (
-                        <li key={task.id}
-                            className="list-group-item mt-1 border d-flex justify-content-between" >
+            {tasks.length === 0
+                ?
+                <div className="text-center">No tasks yet</div>
+                :
+                <ul className="list-group">
+                    {tasks.map(task => {
+                        let titleClass = task.done ? "done" : "";
 
-                            <div className="d-flex">
-                                <div className="form-check">
-                                    <input onChange={() => { onCompleteTask(task.id) }}
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        checked={task.done} />
+                        return (
+                            <li key={task.id}
+                                className="list-group-item mt-1 border d-flex justify-content-between" >
+
+                                <div className="d-flex">
+                                    <div className="form-check">
+                                        <input onChange={() => { onCompleteTask(task.id) }}
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            checked={task.done} />
+                                    </div>
+                                    <div className={titleClass}> {task.title}</div>
                                 </div>
-                                <div className={titleClass}> {task.title}</div>
-                            </div>
 
-                            <div>
-                                <i onClick={() => { onDeleteTask(task.id) }}
-                                    className="fas fa-trash pt-1 text-danger cursor-pointer"></i>
-                            </div>
-                        </li>
-                    )
-                }
-                )}
-            </ul>
+                                <div>
+                                    <i onClick={() => { onDeleteTask(task.id) }}
+                                        className="fas fa-trash pt-1 text-danger cursor-pointer"></i>
+                                </div>
+                            </li>
+                        )
+                    }
+                    )}
+                </ul>
+
+            }
+
         </div >
     );
 };
