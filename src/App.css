@@ -17,3 +17,7 @@ form input {
 input[type="text"] {
     border-top: none !important;
 }
+
+.done {
+    text-decoration: line-through;
+}

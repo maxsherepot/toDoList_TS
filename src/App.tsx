@@ -8,8 +8,8 @@ import { TaskInterface } from './interfaces/interfaces';
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<TaskInterface[]>([
-    { title: "first tasks", id: 1, done: false },
-    { title: "second tasks", id: 2, done: true },
+    { title: "first tasks", id: 1111, done: false },
+    { title: "second tasks", id: 2222, done: true },
   ]);
 
 
@@ -23,12 +23,29 @@ const App: React.FC = () => {
   };
 
 
+  const onCompleteTask = (id: number) => {
+    setTasks(prev =>
+      prev.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            done: !todo.done
+          }
+        }
+        return todo
+      }))
+  };
+
+
 
   return (
     <div className="container">
       <NewTaskInput onAddTask={onAddTask} />
 
-      <TasksList tasks={tasks} />
+      <TasksList
+        tasks={tasks}
+        onCompleteTask={onCompleteTask}
+      />
     </div>
   );
 }
