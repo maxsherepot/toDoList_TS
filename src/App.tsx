@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import DeleteModal from './components/DeleteModal';
 import NewTaskInput from './components/NewTaskInput';
@@ -10,10 +10,16 @@ import { TaskInterface } from './interfaces/interfaces';
 const App: React.FC = () => {
   const [taskId, setTaskId] = useState<number | null>(null);
   const [modal, setModal] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<TaskInterface[]>([
-    { title: "first tasks", id: 1111, done: false },
-    { title: "second tasks", id: 2222, done: true },
-  ]);
+  const [tasks, setTasks] = useState<TaskInterface[]>([]);
+
+  useEffect(() => {
+    const localTasks = JSON.parse(localStorage.getItem("tasks") || "[]") as TaskInterface[];
+    setTasks(localTasks);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const onAddTask = (title: string) => {
     const newTask: TaskInterface = {
