@@ -25,7 +25,8 @@ const App: React.FC = () => {
     const newTask: TaskInterface = {
       title,
       id: Date.now(),
-      done: false
+      done: false,
+      important: false
     };
     if (title != "") {
       setTasks(tasks => [newTask, ...tasks]);
@@ -39,6 +40,19 @@ const App: React.FC = () => {
           return {
             ...todo,
             done: !todo.done
+          }
+        }
+        return todo
+      }));
+  };
+
+  const onMakeImportantTask = (id: number) => {
+    setTasks(prev =>
+      prev.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            important: !todo.important
           }
         }
         return todo
@@ -71,6 +85,7 @@ const App: React.FC = () => {
       <TasksList
         tasks={tasks}
         onCompleteTask={onCompleteTask}
+        onMakeImportantTask={onMakeImportantTask}
         onOpenDeleteModal={onOpenDeleteModal} />
     </div>
   );

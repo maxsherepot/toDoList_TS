@@ -18,6 +18,11 @@ form input {
     text-decoration: line-through;
 }
 
+.important {
+    font-weight: 900;
+    color: darkblue;
+}
+
 .cursor-pointer {
    cursor: pointer;
 }
