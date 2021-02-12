@@ -11,13 +11,20 @@ const App: React.FC = () => {
   const [taskId, setTaskId] = useState<number | null>(null);
   const [modal, setModal] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskInterface[]>([]);
+  const [doneTasks, setDoneTasks] = useState<number>(0);
 
   useEffect(() => {
     const localTasks = JSON.parse(localStorage.getItem("tasks") || "[]") as TaskInterface[];
     setTasks(localTasks);
   }, []);
 
+  const countDoneTasks = (): void => {
+    const quantity = tasks.filter(item => item.done);
+    setDoneTasks(quantity.length);
+  };
+
   useEffect(() => {
+    countDoneTasks();
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
@@ -73,6 +80,10 @@ const App: React.FC = () => {
     setModal(false);
   };
 
+  const onDeleteDoneTasks = (): void => {
+    setTasks(prev => prev.filter(todo => !todo.done));
+  };
+
 
   return (
     <div className="container">
@@ -84,8 +95,10 @@ const App: React.FC = () => {
       <NewTaskInput onAddTask={onAddTask} />
       <TasksList
         tasks={tasks}
+        doneTasks={doneTasks}
         onCompleteTask={onCompleteTask}
         onMakeImportantTask={onMakeImportantTask}
+        onDeleteDoneTasks={onDeleteDoneTasks}
         onOpenDeleteModal={onOpenDeleteModal} />
     </div>
   );
