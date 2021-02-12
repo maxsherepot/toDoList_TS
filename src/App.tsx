@@ -27,7 +27,9 @@ const App: React.FC = () => {
       id: Date.now(),
       done: false
     };
-    setTasks(tasks => [newTask, ...tasks]);
+    if (title != "") {
+      setTasks(tasks => [newTask, ...tasks]);
+    };
   };
 
   const onCompleteTask = (id: number) => {
@@ -40,10 +42,10 @@ const App: React.FC = () => {
           }
         }
         return todo
-      }))
+      }));
   };
 
-  const onOpenDeleteModal = (id: number) => {
+  const onOpenDeleteModal = (id: number): void => {
     setTaskId(id);
     setModal(true);
   };
