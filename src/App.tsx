@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import DeleteModal from './components/DeleteModal';
+import FilterPanel from './components/FilterPanel';
 import NewTaskInput from './components/NewTaskInput';
 import TasksList from './components/TasksList';
 import { TaskInterface } from './interfaces/interfaces';
@@ -93,12 +94,14 @@ const App: React.FC = () => {
           onCloseDeleteModal={onCloseDeleteModal} />
       }
       <NewTaskInput onAddTask={onAddTask} />
+      <FilterPanel
+        doneTasks={doneTasks}
+        onDeleteDoneTasks={onDeleteDoneTasks} />
+
       <TasksList
         tasks={tasks}
-        doneTasks={doneTasks}
         onCompleteTask={onCompleteTask}
         onMakeImportantTask={onMakeImportantTask}
-        onDeleteDoneTasks={onDeleteDoneTasks}
         onOpenDeleteModal={onOpenDeleteModal} />
     </div>
   );
