@@ -13,6 +13,8 @@ const App: React.FC = () => {
   const [modal, setModal] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskInterface[]>([]);
   const [doneTasks, setDoneTasks] = useState<number>(0);
+  const [filter, setFilter] = useState<string>("all");
+
 
   useEffect(() => {
     const localTasks = JSON.parse(localStorage.getItem("tasks") || "[]") as TaskInterface[];
@@ -36,7 +38,7 @@ const App: React.FC = () => {
       done: false,
       important: false
     };
-    if (title != "") {
+    if (title.length > 0 && title !== " ") {
       setTasks(tasks => [newTask, ...tasks]);
     };
   };
@@ -85,6 +87,22 @@ const App: React.FC = () => {
     setTasks(prev => prev.filter(todo => !todo.done));
   };
 
+  const onSetFilter = (filter: string) => setFilter(filter);
+
+  const filterItems = (tasks: TaskInterface[], filter: string) => {
+    switch (filter) {
+      case "all":
+        return tasks
+      case "done":
+        return tasks.filter(item => item.done)
+      case "active":
+        return tasks.filter(item => !item.done)
+      default: return tasks
+    };
+  };
+
+  let visibleItems: TaskInterface[] = filterItems(tasks, filter);
+
 
   return (
     <div className="container">
@@ -94,12 +112,15 @@ const App: React.FC = () => {
           onCloseDeleteModal={onCloseDeleteModal} />
       }
       <NewTaskInput onAddTask={onAddTask} />
+
       <FilterPanel
+        filter={filter}
         doneTasks={doneTasks}
+        onSetFilter={onSetFilter}
         onDeleteDoneTasks={onDeleteDoneTasks} />
 
       <TasksList
-        tasks={tasks}
+        tasks={visibleItems}
         onCompleteTask={onCompleteTask}
         onMakeImportantTask={onMakeImportantTask}
         onOpenDeleteModal={onOpenDeleteModal} />
