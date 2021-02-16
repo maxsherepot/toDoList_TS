@@ -4,9 +4,9 @@ import { TaskInterface } from '../interfaces/interfaces';
 
 interface TasksListProps {
     tasks: TaskInterface[],
-    onCompleteTask(id: number): void,
-    onMakeImportantTask(id: number): void,
-    onOpenDeleteModal(id: number): void
+    onCompleteTask(id: string): void,
+    onMakeImportantTask(id: string): void,
+    onOpenDeleteModal(id: string): void
 };
 
 

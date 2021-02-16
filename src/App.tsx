@@ -5,11 +5,11 @@ import FilterPanel from './components/FilterPanel';
 import NewTaskInput from './components/NewTaskInput';
 import TasksList from './components/TasksList';
 import { TaskInterface } from './interfaces/interfaces';
-
+import { v4 as uuidv4 } from 'uuid';
 
 
 const App: React.FC = () => {
-  const [taskId, setTaskId] = useState<number | null>(null);
+  const [taskId, setTaskId] = useState<string | null>(null);
   const [modal, setModal] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskInterface[]>([]);
   const [doneTasks, setDoneTasks] = useState<number>(0);
@@ -34,7 +34,7 @@ const App: React.FC = () => {
   const onAddTask = (title: string) => {
     const newTask: TaskInterface = {
       title,
-      id: Date.now(),
+      id: uuidv4(),
       done: false,
       important: false
     };
@@ -43,7 +43,7 @@ const App: React.FC = () => {
     };
   };
 
-  const onCompleteTask = (id: number) => {
+  const onCompleteTask = (id: string) => {
     setTasks(prev =>
       prev.map(todo => {
         if (todo.id === id) {
@@ -56,7 +56,7 @@ const App: React.FC = () => {
       }));
   };
 
-  const onMakeImportantTask = (id: number) => {
+  const onMakeImportantTask = (id: string) => {
     setTasks(prev =>
       prev.map(todo => {
         if (todo.id === id) {
@@ -69,7 +69,7 @@ const App: React.FC = () => {
       }));
   };
 
-  const onOpenDeleteModal = (id: number): void => {
+  const onOpenDeleteModal = (id: string): void => {
     setTaskId(id);
     setModal(true);
   };

@@ -1,7 +1,7 @@
 
 export interface TaskInterface {
     title: string,
-    id: number,
+    id: string,
     done: boolean,
     important: boolean
 };
