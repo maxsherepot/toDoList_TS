@@ -38,7 +38,7 @@ const App: React.FC = () => {
       done: false,
       important: false
     };
-    if (title.length > 0 && title !== " ") {
+    if (title.trim() !== "") {
       setTasks(tasks => [newTask, ...tasks]);
     };
   };
