@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-interface DeleteModalProps {
+interface IDeleteModal {
     onCloseDeleteModal: any,
     onDeleteTask: any
 };
 
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ onCloseDeleteModal, onDeleteTask }) => {
+const DeleteModal: React.FC<IDeleteModal> = ({ onCloseDeleteModal, onDeleteTask }) => {
 
     return (
         <div className="modal">

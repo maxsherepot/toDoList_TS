@@ -1,16 +1,16 @@
 import React from 'react';
-import { TaskInterface } from '../interfaces/interfaces';
+import { ITask } from '../interfaces/interfaces';
 
 
-interface TasksListProps {
-    tasks: TaskInterface[],
+interface IListProps {
+    tasks: ITask[],
     onCompleteTask(id: string): void,
     onMakeImportantTask(id: string): void,
     onOpenDeleteModal(id: string): void
 };
 
 
-const TasksList: React.FC<TasksListProps> = ({ tasks, onCompleteTask, onOpenDeleteModal, onMakeImportantTask }) => {
+const TasksList: React.FC<IListProps> = ({ tasks, onCompleteTask, onOpenDeleteModal, onMakeImportantTask }) => {
 
     return (
         <div className="mt-2">

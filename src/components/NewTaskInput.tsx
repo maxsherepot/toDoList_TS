@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-interface NewTaskInputProps {
+interface INewTaskInput {
     onAddTask(title: string): any;
 };
 
 
-const NewTaskInput: React.FC<NewTaskInputProps> = ({ onAddTask }) => {
+const NewTaskInput: React.FC<INewTaskInput> = ({ onAddTask }) => {
     const [title, setTitle] = useState<string>("");
 
     const onTitleChahge = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -27,9 +27,9 @@ const NewTaskInput: React.FC<NewTaskInputProps> = ({ onAddTask }) => {
                     <input
                         value={title}
                         onChange={event => onTitleChahge(event)}
-                        type="text" id="form1Example2"
+                        type="text" id="filterPanel"
                         className="form-control border shadow-3" />
-                    <label className="form-label" htmlFor="form1Example2">enter a task</label>
+                    <label className="form-label" htmlFor="filterPanel">enter a task</label>
                 </div>
             </form>
             <button type="submit"

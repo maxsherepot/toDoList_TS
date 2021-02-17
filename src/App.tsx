@@ -4,20 +4,22 @@ import DeleteModal from './components/DeleteModal';
 import FilterPanel from './components/FilterPanel';
 import NewTaskInput from './components/NewTaskInput';
 import TasksList from './components/TasksList';
-import { TaskInterface } from './interfaces/interfaces';
+import { ITask } from './interfaces/interfaces';
 import { v4 as uuidv4 } from 'uuid';
+import SearchPanel from './components/SearchPanel';
 
 
 const App: React.FC = () => {
   const [taskId, setTaskId] = useState<string | null>(null);
   const [modal, setModal] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<TaskInterface[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<number>(0);
   const [filter, setFilter] = useState<string>("all");
+  const [search, setSearch] = useState<string>("");
 
 
   useEffect(() => {
-    const localTasks = JSON.parse(localStorage.getItem("tasks") || "[]") as TaskInterface[];
+    const localTasks = JSON.parse(localStorage.getItem("tasks") || "[]") as ITask[];
     setTasks(localTasks);
   }, []);
 
@@ -32,7 +34,7 @@ const App: React.FC = () => {
   }, [tasks]);
 
   const onAddTask = (title: string) => {
-    const newTask: TaskInterface = {
+    const newTask: ITask = {
       title,
       id: uuidv4(),
       done: false,
@@ -87,9 +89,9 @@ const App: React.FC = () => {
     setTasks(prev => prev.filter(todo => !todo.done));
   };
 
-  const onSetFilter = (filter: string) => setFilter(filter);
+  const onSetFilter = (filter: string): void => setFilter(filter);
 
-  const filterItems = (tasks: TaskInterface[], filter: string) => {
+  const filterItems = (tasks: ITask[], filter: string) => {
     switch (filter) {
       case "all":
         return tasks
@@ -101,7 +103,11 @@ const App: React.FC = () => {
     };
   };
 
-  let visibleItems: TaskInterface[] = filterItems(tasks, filter);
+  const onSetSearch = (title: string): void => setSearch(title);
+
+  let filteredItems: ITask[] = filterItems(tasks, filter);
+
+  let visibleItems: ITask[] = filteredItems.filter(item => item.title.includes(search));
 
 
   return (
@@ -112,13 +118,12 @@ const App: React.FC = () => {
           onCloseDeleteModal={onCloseDeleteModal} />
       }
       <NewTaskInput onAddTask={onAddTask} />
-
+      <SearchPanel onSetSearch={onSetSearch} />
       <FilterPanel
         filter={filter}
         doneTasks={doneTasks}
         onSetFilter={onSetFilter}
         onDeleteDoneTasks={onDeleteDoneTasks} />
-
       <TasksList
         tasks={visibleItems}
         onCompleteTask={onCompleteTask}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-interface FilterPanelProps {
+interface IFilterPanel {
     filter: string,
     doneTasks: number,
     onDeleteDoneTasks(): void,
@@ -9,7 +9,7 @@ interface FilterPanelProps {
 };
 
 
-const FilterPanel: React.FC<FilterPanelProps> = ({ doneTasks, onDeleteDoneTasks, onSetFilter, filter }) => {
+const FilterPanel: React.FC<IFilterPanel> = ({ doneTasks, onDeleteDoneTasks, onSetFilter, filter }) => {
 
     const buttons = [
         { title: "all" },
