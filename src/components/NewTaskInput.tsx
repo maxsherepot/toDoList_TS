@@ -21,20 +21,22 @@ const NewTaskInput: React.FC<INewTaskInput> = ({ onAddTask }) => {
 
 
     return (
-        <div className="mt-5 d-flex justify-content-between">
-            <form onSubmit={event => onInputSubmit(event)}>
-                <div className="form-outline">
-                    <input
-                        value={title}
-                        onChange={event => onTitleChahge(event)}
-                        type="text" id="filterPanel"
-                        className="form-control border shadow-3" />
-                    <label className="form-label" htmlFor="filterPanel">enter a task</label>
-                </div>
-            </form>
+        <form
+            className="mt-5 d-flex justify-content-between"
+            onSubmit={event => onInputSubmit(event)}>
+            <div className="form-outline">
+                <input
+                    value={title}
+                    onChange={event => onTitleChahge(event)}
+                    type="text" id="filterPanel"
+                    className="form-control border shadow-3" />
+                <label className="form-label" htmlFor="filterPanel">enter a task</label>
+            </div>
+
             <button type="submit"
-                className="btn special-color text-light">Add task</button>
-        </div>
+                className="btn special-color text-light">Add task
+            </button>
+        </form>
     );
 };
 
